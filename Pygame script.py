@@ -1,0 +1,41 @@
+from math import pi
+from random import randint, random
+from time import time
+
+import pygame
+from pygame import Color
+
+From Sprites import #include buttons here
+
+
+background_color = Color(0, 175, 175)
+
+screen = pygame.display.set_mode([1000, 1000])
+screen.fill(background_color)
+
+shape_start_size = 1
+
+start_t = time()
+
+size_incr_per_s = 150
+
+fps = 30
+
+gravity = 4
+
+
+
+running = True
+while running:
+    screen.fill(background_color)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+
+        if event.type == pygame.MOUSEBUTTONUP:
+
+    pygame.display.flip()
+    pygame.time.delay(int(1000/fps))
+
+pygame.quit()
