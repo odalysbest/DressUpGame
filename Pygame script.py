@@ -5,7 +5,7 @@ from time import time
 import pygame
 from pygame import Color
 
-From Sprites import #include buttons here
+from Sprites import Pants #add other buttons
 
 
 background_color = Color(0, 175, 175)
@@ -32,8 +32,9 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-
+            pass
         if event.type == pygame.MOUSEBUTTONUP:
+            pass
 
     pygame.display.flip()
     pygame.time.delay(int(1000/fps))
