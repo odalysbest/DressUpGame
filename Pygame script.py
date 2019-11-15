@@ -4,6 +4,7 @@ from time import time
 
 import pygame
 from pygame import Color
+from Sprites import Button
 
 GREEN = (19, 255, 140)
 GREY = (209, 210 ,210)
@@ -14,8 +15,7 @@ pygame.font.init()
 myfont = pygame.font.SysFont('delicious', 90)
 title = myfont.render('Alien Dress Up', False, PURPLE)
 
-
-from Sprites import Pants #add other buttons
+ #add other buttons
 
 
 background_color = Color(0, 175, 175)
@@ -33,17 +33,16 @@ fps = 30
 
 gravity = 4
 
-
-
 running = True
 while running:
     screen.fill(background_color)
     screen.blit(title, (100, 0))
-    pygame.draw.rect(screen, RED, [40, 50, 100, 100])
-    pygame.draw.rect(screen, RED, [40, 250, 100, 100])
-    pygame.draw.rect(screen, RED, [40, 450, 100, 100])
-    pygame.draw.rect(screen, RED, [40, 650, 100, 100])
-    pygame.draw.rect(screen, RED, [40, 850, 100, 100])
+    clothing_items = ["hat_icon.png", "shirt-icon.png", "shoe-icon.png", "pant-icon.png", "dress-icon.png"]
+    for item in clothing_items:
+        x = 40
+        y += 50
+        screen.blit(Button.image, Button.rect)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

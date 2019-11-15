@@ -9,8 +9,8 @@ class Button(Sprite):
 
     def __init__(self, x, y):
         self.pos = [x, y]
-
-
+        self.image = pygame.image.load(img).convert_alpha()
+        self.rect = pygame.rect(x, y, 100, 100)
 
     def draw(self, screen):
         raise NotImplementedError
