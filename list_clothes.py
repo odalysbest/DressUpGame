@@ -1,4 +1,4 @@
-list_icons = ['hat-icon.png', 'shirt-icon.png', 'pant-icon.png', 'dress-icon.png', 'shoe-icon.png']
+list_icons = ['icons/hat-icon.png', 'icons/shirt-icon.png', 'icons/pant-icon.png', 'icons/dress-icon.png', 'icons/shoe-icon.png']
 
 list_hats = []
 list_shirts = []
