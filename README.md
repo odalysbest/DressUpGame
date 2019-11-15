@@ -1,17 +1,20 @@
-# Alien Dress Up Game#
+# Alien Dress Up Game
 
 This project creates a game in which the user helps an alien choose an outfit
 that is appropriate for a certain situation. This program was created as our final project for the course Software Design FA19 at Olin College.
 
-#Authors:#
+**Authors:**
+
 Odalys Benitez, Lacie Fradet, Katie Thai-Tang
 
-#Getting Started:#
+**Getting Started:**
+
 Our program use the pygame library to run interactively. To install pygame
 run `pip install pygame` in the terminal. It is recommended to run pygame
 Python 3 or more recent.
 
-#Usage:#
+**Usage:**
+
 To start the game, run 'Pygame script.py'. This should open an interactive
 display where will be prompted to dress the alien for an event. Click on the
 buttons for a category of clothing and then select an article of clothing.
