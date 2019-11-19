@@ -23,16 +23,6 @@ background_color = Color(0, 175, 175)
 screen = pygame.display.set_mode([1000, 1000])
 screen.fill(background_color)
 
-shape_start_size = 1
-
-start_t = time()
-
-size_incr_per_s = 150
-
-fps = 30
-
-gravity = 4
-
 running = True
 
 clothing_items = ["hat-icon.png", "shirt-icon.png", "shoe-icon.png", "pant-icon.png", "dress-icon.png"]
