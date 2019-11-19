@@ -34,15 +34,20 @@ fps = 30
 gravity = 4
 
 running = True
+
+clothing_items = ["hat-icon.png", "shirt-icon.png", "shoe-icon.png", "pant-icon.png", "dress-icon.png"]
+x = 100
+y = 100
+buttons = []
+for item in clothing_items:
+    buttons.append(Button(item, x, y, item.split('.')[0]))
+    y += 100
+
 while running:
     screen.fill(background_color)
     screen.blit(title, (100, 0))
-    clothing_items = ["hat_icon.png", "shirt-icon.png", "shoe-icon.png", "pant-icon.png", "dress-icon.png"]
-    for item in clothing_items:
-        Button(item, 40 , 50)
-        screen.blit(Button.image, Button.rect)
-        x = 40
-        y += 50
+    for button in buttons:
+        screen.blit(button.image, button.pos)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
