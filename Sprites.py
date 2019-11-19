@@ -7,10 +7,19 @@ import pygame.draw
 
 class Button(Sprite):
 
-    def __init__(self, x, y):
+    def __init__(self, img, x, y, name):
         self.pos = [x, y]
         self.image = pygame.image.load(img).convert_alpha()
-        self.rect = pygame.rect(x, y, 100, 100)
+        self.rect = pygame.Rect(x, y, 100, 100)
+        self.name = name
+
+    def get_event(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+            self.on_click(event)
+
+    def on_click(self, event):
+        if self.rect.collidepoint(event.pos):
+            self.function()
 
     def draw(self, screen):
         raise NotImplementedError
