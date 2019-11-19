@@ -39,10 +39,10 @@ while running:
     screen.blit(title, (100, 0))
     clothing_items = ["hat_icon.png", "shirt-icon.png", "shoe-icon.png", "pant-icon.png", "dress-icon.png"]
     for item in clothing_items:
+        Button(item, 40 , 50)
+        screen.blit(Button.image, Button.rect)
         x = 40
         y += 50
-        screen.blit(Button.image, Button.rect)
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
