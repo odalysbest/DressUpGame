@@ -27,7 +27,7 @@ class PyManMain:
 
         intro = True
         self.screen.fill((0,0,0))
-        titlescreen = newScreen('titlescreen1.png', [0,0])
+        titlescreen = newScreen('startscreen.png', [0,0])
         self.screen.blit(titlescreen.image,titlescreen.rect)
         pygame.display.flip()
 
@@ -36,24 +36,8 @@ class PyManMain:
                 if event.type == KEYDOWN:
                         if (event.key == K_SPACE):
                             # Press Space to Move to Next Screen
-                            MainWindow.game_controls()
-        clock.tick(15)
-
-    def game_controls(self):
-        """Create the Controls Screen"""
-
-        intro = True
-        self.screen.fill((0,0,0))
-        controlscreen = newScreen('controlscreen.png', [0,0])
-        self.screen.blit(controlscreen.image,controlscreen.rect)
-        pygame.display.flip()
-
-        while intro:
-            for event in pygame.event.get():
-                if event.type == KEYDOWN:
-                        if (event.key == K_SPACE):
-                            # Press Space to Move to Next Screen
                             MainWindow.MainLoop()
+        clock.tick(15)
 
     def MainLoop(self):
         """This is the Main Loop of the Game"""
