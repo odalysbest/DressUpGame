@@ -2,6 +2,7 @@ import os, sys
 import pygame
 import numpy as np
 from pygame.locals import *
+from pathlib import Path
 
 
 class PyManMain:
@@ -42,9 +43,16 @@ class PyManMain:
     def MainLoop(self):
         """This is the Main Loop of the Game"""
 
+        #Randomly select file
+        path = Path("Backgroundimages")
+        files = os.listdir(path)
+        index = random.randrange(0, len(files))
+        #print(files[index])
+
         # Create The Backgound
-        background = pygame.Surface(self.screen.get_size())
-        background = background.convert()
+        game = True
+        self.screen.fill((0,0,0))
+        background = newScreen(files[index], [0,0])
 
 class newScreen(pygame.sprite.Sprite):
     def __init__(self, image_file, location):
