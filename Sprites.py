@@ -9,17 +9,27 @@ class Button(Sprite):
 
     def __init__(self, img, x, y, name):
         self.pos = [x, y]
-        self.image = pygame.image.load(img).convert_alpha()
+        try:
+            self.image = pygame.transform.scale(pygame.image.load(img).convert_alpha(), (100, 100))
+        except:
+            try:
+                self.image = pygame.transform.scale(pygame.image.load('drawings/'+img).convert_alpha(), (100, 100))
+            except:
+                self.image = pygame.transform.scale(pygame.image.load('icons/' + img).convert_alpha(), (100, 100))
         self.rect = pygame.Rect(x, y, 100, 100)
         self.name = name
+        self.function = lambda: None
+
 
     def get_event(self, event):
-        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             self.on_click(event)
+
 
     def on_click(self, event):
         if self.rect.collidepoint(event.pos):
             self.function()
+
 
     def draw(self, screen):
         raise NotImplementedError
@@ -29,9 +39,11 @@ class Shirt(Button):
     def __init__(self):
         super().__init__(x, y)
         self.image = self.image = pygame.image.load(shirts).convert_alpha()
+
     def draw(self, screen):
         pygame.draw.rect(self.image, color, [0, screen])
         pass
+
 
 class Pants(Button):
     def __init__(self):
@@ -41,6 +53,7 @@ class Pants(Button):
     def draw(self, screen):
         pygame.draw.rect(self.image, color, [0, screen])
         pass
+
 
 class Dress(Button):
     def __init__(self):
@@ -56,14 +69,17 @@ class Shoes(Button):
     def __init__(self):
         super().__init__(x, y)
         self.image = self.image = pygame.image.load(shoe).convert_alpha()
+
     def draw(self, screen):
         pygame.draw.rect(self.image, color, [0, screen])
         pass
+
 
 class Accessory(Button):
     def __init__(self):
         super().__init__(x, y)
         self.image = self.image = pygame.image.load(accessories).convert_alpha()
+
     def draw(self, screen):
         pygame.draw.rect(self.image, color, [0, screen])
         pass
