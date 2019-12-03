@@ -9,14 +9,14 @@ Odalys Benitez, Lacie Fradet, Katie Thai-Tang
 
 **Getting Started:**
 
-Our program use the pygame library to run interactively. To install pygame
+Our program uses the pygame library to run interactively. To install pygame
 run `pip install pygame` in the terminal. It is recommended to run pygame
 Python 3 or more recent.
 
 **Usage:**
 
 To start the game, run 'Pygame script.py'. This should open an interactive
-display where will be prompted to dress the alien for an event. Click on the
+display where you will be prompted to dress the alien for an event. Click on the
 buttons for a category of clothing and then select an article of clothing.
 Upon clicking, the item should appear on the alien, clicking again will remove
 the item from the alien. Once you have put together an outfit, clicking the
