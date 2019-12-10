@@ -1,33 +1,37 @@
 from enum import Enum
-from math import pi
-from random import randint, random
-from time import time
-
+from random import random, randint, randrange
+import os, sys
 import pygame
 from pygame import Color
 from Sprites import Button
 
-# from PyMain import PyManMain
-# from PyMain import newScreen
-
+pygame.display.init()
+pygame.font.init()
 GREEN = (19, 255, 140)
 GREY = (209, 210, 210)
 WHITE = (254, 255, 255)
 RED = (254, 0, 0)
 PURPLE = (254, 0, 255)
-pygame.font.init()
+
+screen = pygame.display.set_mode([1000, 1000])
+alien_img = pygame.transform.scale(pygame.image.load('alien-base.png').convert_alpha(), (600, 605))
+
+background_images = [pygame.transform.scale(pygame.image.load("babson.jpg").convert_alpha(), (1000, 1000)),
+                     pygame.transform.scale(pygame.image.load("beach.jpg").convert_alpha(), (1000, 1000)),
+                     pygame.transform.scale(pygame.image.load("nightclub2.jpg").convert_alpha(), (1000, 1000)),
+                     pygame.transform.scale(pygame.image.load("olin.jpg").convert_alpha(), (1000, 1000)),
+                     pygame.transform.scale(pygame.image.load("snow.jpg").convert_alpha(), (1000, 1000))]
+index = randrange(0, len(background_images))
+background = (background_images[index])
 myfont = pygame.font.SysFont('sansserif', 90)
 title = myfont.render('Alien Dress Up', False, PURPLE)
 
-# add other buttons
-pygame.display.init()
 
-screen = pygame.display.set_mode([1000, 1000])
+    # add other buttons
+
+
 background_color = Color(0, 175, 175)
 bgdimage = pygame.transform.scale(pygame.image.load("start screen.png"), (1000, 1000))
-
-
-
 
 running = True
 
@@ -40,31 +44,17 @@ class States(Enum):
     PANTS = 4
     DRESS = 5
 
-class SubClothing(Enum):
-    INITIAL = 0
-    HAT1 = 1
-    HAT2 = 2
-    SHIRTS1 = 3
-    SHIRTS2 = 4
-    SHIRTS3 = 5
-    SHOE1 = 6
-    SHOE2 = 7
-    PANTS1 = 8
-    PANTS2 = 9
-    DRESS1 = 10
-    DRESS2 = 11
 
-
-hatButton = Button("hat-icon.png", 100, 150, "hat-icon")
+hatButton = Button("hat-icon.png", 100, 100, "hat-icon")
 shirtButton = Button("shirt-icon.png", 100, 250, "shirt-icon")
-shoeButton = Button("shoe-icon.png", 100, 350, "shoe-icon")
-pantButton = Button("pant-icon.png", 100, 450, "pant-icon")
-dressButton = Button("dress-icon.png", 100, 550, "dress-icon")
-hat1Button = Button("earmuff.png", 250, 150, "earmuff")
-hat2Button = Button("necklace.png", 350, 150, "necklace")
-shirt1Button = Button("crop-top.png", 250, 250, "crop-top")
-shirt2Button = Button("orange-shirt.png", 350, 250, "orange-shirt")
-shirt3Button = Button("pink-sweater.png", 450, 250, "pink-sweater")
+shoeButton = Button("shoe-icon.png", 100, 400, "shoe-icon")
+pantButton = Button("pant-icon.png", 100, 550, "pant-icon")
+dressButton = Button("dress-icon.png", 100, 700, "dress-icon")
+hat1Button = Button("earmuff.png", 190, 100, "earmuff")
+hat2Button = Button("necklace.png", 250, 100, "necklace")
+shirt1Button = Button("crop-top.png", 150, 150, "crop-top")
+shirt2Button = Button("orange-shirt.png", 250, 150, "orange-shirt")
+shirt3Button = Button("pink-sweater.png", 350, 150, "pink-sweater")
 shoe1Button = Button("boots.png", 250, 350, "boots")
 shoe2Button = Button("grey-shoes.png", 350, 350, "grey-shoes")
 pants1Button = Button("jeans.png", 250, 450, "jeans")
@@ -77,7 +67,6 @@ shoes = [shoe1Button, shoe2Button]
 pants = [pants1Button, pants2Button]
 dresses = [dress1Button, dress2Button]
 state = States.MENU
-current = SubClothing.INITIAL
 
 
 class StateMachine:
@@ -87,16 +76,8 @@ class StateMachine:
     def changeState(self, state):
         self.currentState = state
 
-class SubClothingMachine:
-    def __init__(self):
-        self.currentState = SubClothing.INITIAL
-
-    def setEnabled(self, current):
-        self.currentState = current
-
 
 stateMachine = StateMachine()
-subclothing = SubClothingMachine()
 
 hatButton.function = lambda: stateMachine.changeState(States.HAT)
 shirtButton.function = lambda: stateMachine.changeState(States.SHIRTS)
@@ -104,26 +85,37 @@ shoeButton.function = lambda: stateMachine.changeState(States.SHOES)
 pantButton.function = lambda: stateMachine.changeState(States.PANTS)
 dressButton.function = lambda: stateMachine.changeState(States.DRESS)
 
+enabledict = {hat1Button: False, hat2Button: False, shirt1Button: False, shirt2Button: False, shirt3Button: False,
+              shoe1Button: False, shoe2Button: False, pants1Button: False, pants2Button: False, dress1Button: False,
+              dress2Button: False}
 
 
-hat1Button.function = lambda: subclothing.setEnabled(SubClothing.HAT1)
-hat2Button.function = lambda: subclothing.setEnabled(SubClothing.HAT2)
-shirt1Button.function = lambda: subclothing.setEnabled(SubClothing.SHIRTS1)
-shirt2Button.function = lambda: subclothing.setEnabled(SubClothing.SHIRTS2)
-shirt3Button.function = lambda: subclothing.setEnabled(SubClothing.SHIRTS3)
-shoe1Button.function = lambda: subclothing.setEnabled(SubClothing.SHOE1)
-shoe2Button.function = lambda: subclothing.setEnabled(SubClothing.SHOE2)
-pants1Button.function = lambda: subclothing.setEnabled(SubClothing.PANTS1)
-pants2Button.function = lambda: subclothing.setEnabled(SubClothing.PANTS2)
-dress1Button.function = lambda: subclothing.setEnabled(SubClothing.DRESS1)
-dress2Button.function = lambda: subclothing.setEnabled(SubClothing.DRESS2)
-# for item in allClothingItems:
-# if item.is_enabled: screen.blit(item.image, item.pos)
+def setEnabled(item):
+    enabledict[item] = not enabledict[item]
+
+
+posdict = {hat1Button: (790, 250), hat2Button: (780, 380), shirt1Button: (710, 330), shirt2Button: (710, 325),
+           shirt3Button: (648, 278), shoe1Button: (715, 705), shoe2Button: (715, 720), pants1Button: (745, 480),
+           pants2Button: (745, 485), dress1Button: (760, 380), dress2Button: (745, 383)}
+
+hat1Button.function = lambda: setEnabled(hat1Button)
+hat2Button.function = lambda: setEnabled(hat2Button)
+shirt1Button.function = lambda: setEnabled(shirt1Button)
+shirt2Button.function = lambda: setEnabled(shirt2Button)
+shirt3Button.function = lambda: setEnabled(shirt3Button)
+shoe1Button.function = lambda: setEnabled(shoe1Button)
+shoe2Button.function = lambda: setEnabled(shoe2Button)
+pants1Button.function = lambda: setEnabled(pants1Button)
+pants2Button.function = lambda: setEnabled(pants2Button)
+dress1Button.function = lambda: setEnabled(dress1Button)
+dress2Button.function = lambda: setEnabled(dress2Button)
 
 introscreen = True
 while introscreen:
     screen.blit(bgdimage, (0, 0))
     pygame.display.flip()
+
+    screen.fill((0, 0, 0))
     pygame.time.delay(int(1000 / 60))
     for event in pygame.event.get():
         print(event.type)
@@ -132,13 +124,12 @@ while introscreen:
                 print("Exiting")
                 introscreen = False
 
+
 while running:
     print(stateMachine.currentState)
-
-    screen.fill(background_color)
+    screen.blit(background, (0,0))
     screen.blit(title, (270, 25))
-    screen.blit(pygame.transform.scale(pygame.image.load('drawings/alien-base.png').convert_alpha(), (380, 600)),
-                [600, 200])
+    screen.blit(alien_img, (500, 220))
     screen.blit(hatButton.image, hatButton.pos)
     screen.blit(shirtButton.image, shirtButton.pos)
     screen.blit(shoeButton.image, shoeButton.pos)
@@ -171,13 +162,6 @@ while running:
     elif stateMachine.currentState == States.HAT:
         for button in hats:
             screen.blit(button.image, button.pos)
-
-        if subclothing.currentState == SubClothing.HAT1:
-            screen.blit(hat1Button.image, (790, 220))
-        elif subclothing.currentState == SubClothing.HAT2:
-            screen.blit(hat2Button.image, (775, 350))
-        else:
-            subclothing.currentState == SubClothing.INITIAL
     elif stateMachine.currentState == States.SHIRTS:
         for button in shirts:
             screen.blit(button.image, button.pos)
@@ -190,6 +174,10 @@ while running:
     elif stateMachine.currentState == States.DRESS:
         for button in dresses:
             screen.blit(button.image, button.pos)
+
+    for item in enabledict:
+        if enabledict[item]:
+            screen.blit(item.image, posdict[item])
 
     pygame.display.flip()
     pygame.time.delay(int(1000 / 60))

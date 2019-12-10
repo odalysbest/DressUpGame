@@ -38,3 +38,5 @@ dresses = []
 for item in list_dresses:
     dresses.append(Button(item, x, y, item.split('.')[-1]))
     x += 150
+    screen.blit(pygame.transform.scale(pygame.image.load('alien-base.png').convert_alpha(), (300, 535)),
+                [650, 240])
